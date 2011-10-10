@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="MibEntry" table="mibentry">
+		<id name="id" column="uid" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="entryName" type="string" />
+		<property name="oid" type="string" />
+		<property name="type" type="string" />
+		<property name="value" type="string" />
+		<property name="valueGenType" type="string" />
+		<property name="constraints" type="string" />
+	</class>
+</hibernate-mapping>
+
