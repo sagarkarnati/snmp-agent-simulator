@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- The IoHandler implementation -->
+	<bean id="trapHandler" class="com.mindtree.agentsim.mina.server.ServerHandler">
+		<constructor-arg ref="requestQueue" />
+		<constructor-arg ref="executorService" />
+		<!-- Number of request Dispatcher threads to be created -->
+		<constructor-arg value="5" />
+	</bean>
+
+	<bean id="requestQueue" class="com.mindtree.agentsim.common.BlockingQueue">
+		<constructor-arg value="2000" />
+	</bean>
+
+	<bean id="responseQueue" class="com.mindtree.agentsim.common.BlockingQueue">
+		<constructor-arg value="2000" />
+	</bean>
+
+	<bean id="executorService"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod">
+			<value>java.util.concurrent.Executors.newFixedThreadPool</value>
+		</property>
+		<property name="arguments">
+			<value>50</value>
+		</property>
+	</bean>
+
+	<bean id="executorFilterService"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod">
+			<value>java.util.concurrent.Executors.newCachedThreadPool</value>
+		</property>
+	</bean>
+
+	<bean id="snmpCodecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+		<constructor-arg>
+			<bean class="com.mindtree.agentsim.mina.snmp.SNMPCodecFactory" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="executorFilter" class="org.apache.mina.filter.executor.ExecutorFilter">
+		<constructor-arg>
+			<ref bean="executorFilterService" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter" />
+
+	<!-- The filter chain. -->
+	<bean id="filterChainBuilder"
+		class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+		<property name="filters">
+			<map>
+				<entry key="executorFilter" value-ref="executorFilter" />
+				<entry key="loggingFilter" value-ref="loggingFilter" />
+				<entry key="codecFilter" value-ref="snmpCodecFilter" />
+			</map>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.net.SocketAddress">
+					<bean class="org.apache.mina.integration.beans.InetSocketAddressEditor" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- The IoAcceptor which binds to port -->
+	<bean id="ioAcceptor"
+		class="org.apache.mina.transport.socket.nio.NioDatagramAcceptor"
+		init-method="bind" destroy-method="unbind">
+		<property name="defaultLocalAddress" value="127.0.0.1:161" />
+		<property name="handler" ref="trapHandler" />
+		<property name="filterChainBuilder" ref="filterChainBuilder" />
+	</bean>
+
+	<!--	 Beans related to the Start-Up Module -->
+	<!--	 This takes the list of the bean which implements simModuleIntf -->
+	<!--
+		<bean id="startupManager"
+		class="com.mindtree.agentsim.startup.StartUpManager">
+	-->
+	<!--		<constructor-arg>-->
+	<!--			<list>-->
+	<!--			 	<ref bean="snmpRequestListner"/>-->
+	<!--			</list>-->
+	<!--		</constructor-arg>-->
+	<!--	</bean>-->
+	<!--	-->
+	<!--
+		<bean id="snmpRequestListner"
+		class="com.mindtree.agentsim.mina.SNMPRequestListner"/>
+	-->
+
+
+<!--	 Hibernate configuration goes here -->
+<!--	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+<!--		<property name="driverClassName" value="org.hsqldb.jdbcDriver"/>-->
+<!--		<property name="url" value="jdbc:hsqldb:data/tutorial"/>-->
+<!--		<property name="username" value="simulator"/>-->
+<!--		<property name="password" value="simulator"/>-->
+<!--	</bean>-->
+<!--	-->
+<!--	<bean id="factory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">-->
+<!--		<property name="mappingResources">-->
+<!--			<list>-->
+<!--				<value>Event.hbm.xml</value>-->
+<!--			</list>-->
+<!--		</property>-->
+<!--		<property name="hibernateProperties">-->
+<!--			<props>-->
+<!--				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>-->
+<!--				<prop key="hibernate.show_sql">true</prop>-->
+<!--			</props>-->
+<!--		</property>-->
+<!--		<property name="dataSource">-->
+<!--			<ref bean="dataSource" />-->
+<!--		</property>-->
+<!--	</bean>-->
+<!--	<bean id="mibDao" class="EventSpringDao">-->
+<!--		<property name="sessionFactory">-->
+<!--			<ref bean="factory" />-->
+<!--		</property>-->
+<!--	</bean>-->
+</beans>
