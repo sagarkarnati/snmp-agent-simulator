@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- The IoHandler implementation -->
+	<bean id="messageHandler" class="com.mindtree.agentsim.mina.server.ServerHandler">
+		<constructor-arg ref="requestQueue" />
+		<constructor-arg ref="executorService" />
+		<!-- Number of request Dispatcher threads to be created -->
+		<constructor-arg value="1" />
+	</bean>
+
+	<bean id="requestQueue" class="com.mindtree.agentsim.common.BlockingQueue">
+		<constructor-arg value="12000" />
+	</bean>
+
+	<bean id="responseQueue" class="com.mindtree.agentsim.common.BlockingQueue">
+		<constructor-arg value="12000" />
+	</bean>
+
+	<bean id="executorService"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod">
+			<value>java.util.concurrent.Executors.newFixedThreadPool</value>
+		</property>
+		<property name="arguments">
+			<value>50</value>
+		</property>
+	</bean>
+
+	<bean id="executorFilterService"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod">
+			<value>java.util.concurrent.Executors.newCachedThreadPool</value>
+		</property>
+	</bean>
+
+	<bean id="snmpCodecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+		<constructor-arg ref="snmpCodecFactory" />
+	</bean>
+
+	<bean id="snmpCodecFactory" class="com.mindtree.agentsim.mina.snmp.SNMPCodecFactory">
+		<!-- Encoder -->
+		<constructor-arg index="0" ref="snmpEncoder" />
+		<!-- Decoder -->
+		<constructor-arg index="1" ref="snmpDecoder" />
+	</bean>
+
+	<bean id="snmpEncoder" class="com.mindtree.agentsim.mina.snmp.SNMP4JEncoderCodec" />
+	<bean id="snmpDecoder" class="com.mindtree.agentsim.mina.snmp.SNMP4JDecoderCodec" />
+
+	<bean id="executorFilter" class="org.apache.mina.filter.executor.ExecutorFilter">
+		<constructor-arg>
+			<ref bean="executorFilterService" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter" />
+
+	<!-- The filter chain. -->
+	<bean id="filterChainBuilder"
+		class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+		<property name="filters">
+			<map>
+				<!-- <entry key="executorFilter" value-ref="executorFilter" /> -->
+				<!-- <entry key="loggingFilter" value-ref="loggingFilter" /> -->
+				<entry key="codecFilter" value-ref="snmpCodecFilter" />
+			</map>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.net.SocketAddress">
+					<bean class="org.apache.mina.integration.beans.InetSocketAddressEditor" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- The IoAcceptor which binds to port -->
+<!--	<bean id="ioAcceptor"-->
+<!--		class="org.apache.mina.transport.socket.nio.NioDatagramAcceptor"-->
+<!--		init-method="bind" destroy-method="unbind">-->
+<!--		<property name="defaultLocalAddress" value="172.25.200.224:161" />-->
+<!--		<property name="handler" ref="messageHandler" />-->
+<!--		<property name="filterChainBuilder" ref="filterChainBuilder" />-->
+<!--	</bean>-->
+	
+	<bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioDatagramAcceptor">
+		<property name="handler" ref="messageHandler" />
+	    <property name="filterChainBuilder" ref="filterChainBuilder" />
+	</bean>
+	
+	<bean id="mibParser" class="com.mindtree.agentsim.mibble.MibParser">
+		<constructor-arg value="./mibs" />
+	</bean>
+
+	<bean id="deviceParser" class="com.mindtree.agentsim.parser.DeviceDataParser">
+		<constructor-arg ref="xmlParser" />
+	</bean>
+
+	<bean id="xmlParser" class="com.mindtree.agentsim.parser.XMLParser">
+		<constructor-arg index="0" value="./config/Devices.xml" />
+		<constructor-arg index="1" value="./models" />
+	</bean>
+
+	<bean id="cache" class="com.mindtree.agentsim.repository.LRUCache">
+		<constructor-arg value="5000" />
+	</bean>
+
+	<bean id="variableGen" class="com.mindtree.tools.VariableGen">
+		<constructor-arg index="0" ref="mibrepositoty" />
+		<constructor-arg index="1" ref="deviceParser" />
+	</bean>
+
+	<bean id="vipCreater" class="com.mindtree.agentsim.startup.VIPUtilities" />
+
+<!--	 Hibernate configuration goes here -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="url" value="jdbc:hsqldb:mem/AgentSimulator" />
+		<property name="username" value="SA" />
+		<property name="password" value="" />
+	</bean>
+<!---->
+<!--	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+<!--        <property name="url" value="jdbc:mysql://127.0.0.1/agentSimulator"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value="root"/>-->
+<!--    </bean>-->
+
+	<bean id="factory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingResources">
+			<list>
+				<value>com/mindtree/agentsim/mibble/MibEntry.hbm.xml</value>
+				<value>com/mindtree/agentsim/parser/Device.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	<bean id="mibrepositoty" class="com.mindtree.agentsim.repository.RepositoryDao">
+		<constructor-arg ref="cache" />
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+</beans>
