@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<array-list>
+	<mib-entry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="java:com.mindtree.agentsim.mibble.MibEntry">
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343</oid>
+		<entry-name>intel</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1</oid>
+		<entry-name>identifiers</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1</oid>
+		<entry-name>systems</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.1</oid>
+		<entry-name>pc-systems</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.2</oid>
+		<entry-name>proxy-systems</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3</oid>
+		<entry-name>hub-systems</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.1</oid>
+		<entry-name>express10-100Stack</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.2</oid>
+		<entry-name>express12TX</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.3</oid>
+		<entry-name>express24TX</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.4</oid>
+		<entry-name>expressReserved</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.5</oid>
+		<entry-name>expressMgmt</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.6</oid>
+		<entry-name>expressBridge</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.7</oid>
+		<entry-name>express210-12</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.8</oid>
+		<entry-name>express210-24</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.9</oid>
+		<entry-name>express220-12</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.1.3.10</oid>
+		<entry-name>express220-24</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.2</oid>
+		<entry-name>objects</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.3</oid>
+		<entry-name>comm-methods</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.3.1</oid>
+		<entry-name>local-proxy-1</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.1.3.2</oid>
+		<entry-name>pc-novell-1</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2</oid>
+		<entry-name>products</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.1</oid>
+		<entry-name>pc-products</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.2</oid>
+		<entry-name>hub-products</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.2.1</oid>
+		<entry-name>express110</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.3</oid>
+		<entry-name>proxy</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.4</oid>
+		<entry-name>print-products</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.4.1</oid>
+		<entry-name>netport-1</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.4.2</oid>
+		<entry-name>netport-2</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.4.3</oid>
+		<entry-name>netport-express</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.5</oid>
+		<entry-name>network-products</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.5.1</oid>
+		<entry-name>lanDesk</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.5.1.1</oid>
+		<entry-name>ld-alarms</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.5.2</oid>
+		<entry-name>internetServer-2</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.5.2.1</oid>
+		<entry-name>iS-alarms</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.6</oid>
+		<entry-name>snmp-agents</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.2.7</oid>
+		<entry-name>nic-products</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.3</oid>
+		<entry-name>experimental</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+	<mib-entry>
+		<access></access>
+		<value-gen-type>NONE</value-gen-type>
+		<type>OBJECT IDENTIFIER</type>
+		<oid>1.3.6.1.4.1.343.4</oid>
+		<entry-name>information-technology</entry-name>
+		<value></value>
+		<constraints></constraints>
+	</mib-entry>
+</array-list>

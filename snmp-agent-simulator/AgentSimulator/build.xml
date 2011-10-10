@@ -1,0 +1,135 @@
+<?xml version="1.0" ?>
+<project name="AgentSimulator" default="package">
+
+	<property name="base.dir" value="." />
+	<property name="src.dir" value="${base.dir}/src" />
+	<property name="config.dir" value="${base.dir}/config" />
+	<property name="lib.dir" value="${base.dir}/lib" />
+	<property name="build.dir" value="${base.dir}/build" />
+	<property name="mibs.dir" value="${base.dir}/mibs" />
+	<property name="dist.dir" value="${base.dir}/distribution" />
+	<property name="models.dir" value="${base.dir}/models" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="logs.dir" value="${build.dir}/logs" />
+
+	<property name="jrezip.name" value="jre.zip" />
+	<property name="jar.name" value="AgentSimulator.jar" />
+	<property name="tar.name" value="AgentSimulator" />
+	<property name="script.name" value="startAgentSimulator.sh" />
+
+	<!-- jar file path -->
+	<path id="build.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="get-jvm">
+		<condition property="jvm.ok">
+			<or>
+				<equals arg1="${ant.java.version}" arg2="1.5" />
+			</or>
+		</condition>
+	</target>
+
+	<target name="check-jvm" depends="get-jvm" unless="jvm.ok">
+		<fail message="Wrong JVM - ${ant.java.version}" />
+	</target>
+
+	<target name="testJavaVersion" depends="check-jvm">
+		<echo message="JVM OK - ${ant.java.version}" />
+	</target>
+
+	<!-- CLEAN -->
+	<target name="clean" depends="testJavaVersion">
+		<echo>=== Cleaning ${build.dir} and ${dist.dir} directories===</echo>
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+	</target>
+
+	<!-- CREATE DIRECTORIES -->
+	<target name="init" depends="clean">
+		<echo>=== Creating the temp directories ===</echo>
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${build.dir}/${tar.name}" />
+		<mkdir dir="${build.dir}/${tar.name}/${logs.dir}" />
+		<mkdir dir="${build.dir}/${tar.name}/${config.dir}" />
+		<mkdir dir="${build.dir}/${tar.name}/${lib.dir}" />
+		<mkdir dir="${build.dir}/${tar.name}/${mibs.dir}" />
+		<mkdir dir="${build.dir}/${tar.name}/${models.dir}" />
+	</target>
+
+	<!-- COMPILE -->
+	<target name="compile" depends="init">
+		<echo>=== COMPILE ===</echo>
+		<echo>Compiling ${src.dir} files ...</echo>
+		<javac debug="on" srcdir="${src.dir}" destdir="${classes.dir}" includes="**/*" target="1.5" source="1.5" includeJavaRuntime="false" includeAntRuntime="false">
+			<classpath refid="build.class.path" />
+		</javac>
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<!-- MAKING JAR FILE -->
+	<target name="makeJar" depends="compile">
+		<echo>=== Creating the ${jar.name} in ${build.dir}/${lib.dir} ===</echo>
+		<jar destfile="${build.dir}/${tar.name}/${lib.dir}/${jar.name}" basedir="${classes.dir}" />
+	</target>
+
+	<!-- COPYING USEFULL FILES -->
+	<target name="copyFiles" depends="makeJar">
+		<echo>=== Copying folders for packaging ===</echo>
+		<copy todir="${build.dir}/${tar.name}/${config.dir}">
+			<fileset dir="${config.dir}">
+				<include name="*.*" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/${tar.name}/${lib.dir}">
+			<fileset dir="${lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/${tar.name}/${mibs.dir}">
+			<fileset dir="${mibs.dir}">
+				<include name="*.*" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/${tar.name}/${models.dir}">
+			<fileset dir="${models.dir}">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/${tar.name}">
+			<fileset dir="${base.dir}">
+				<include name="*.sh" />
+				<include name="*.bat" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- UN-ZIPPING THE JRE -->
+	<target name="unzipjre" depends="copyFiles">
+		<echo> === UnZipping the jre === </echo>
+		<unzip src="${jrezip.name}" dest="${build.dir}/${tar.name}" />
+	</target>
+
+	<!-- Tar PACKAGE -->
+	<target name="package" depends="unzipjre">
+		<echo> === Packaging the files === </echo>
+		<delete dir="${classes.dir}" />
+		<tar tarfile="${dist.dir}/AgentSimulator.tar" basedir="${build.dir}" />
+		<gzip zipfile="${dist.dir}/AgentSimulator.tar.gz" src="${dist.dir}/AgentSimulator.tar" />
+		<delete file="${dist.dir}/AgentSimulator.tar" />
+	</target>
+
+	<!-- Zip PACKAGE -->
+	<target name="WinPackage" depends="unzipjre">
+		<echo> === Packaging the files === </echo>
+		<delete dir="${classes.dir}" />
+		<zip destfile="${dist.dir}/AgentSimulator.zip" basedir="${build.dir}" update="true" />
+	</target>
+
+</project>
