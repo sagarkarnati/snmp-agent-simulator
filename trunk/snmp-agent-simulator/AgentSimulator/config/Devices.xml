@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<array-list>
+    <device-details
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.mindtree.agentsim.parser.DeviceDetails">
+        <!--This it the IPAddress of the device going to be created -->
+        <device-iPAddress>192.168.1.208</device-iPAddress>
+        <!--Name of the MIB file that device is going to be supported.this should be available in the MIBs folder-->
+        <mib-file-name>intel.mib</mib-file-name>
+        <!--On this port the device is going to listen for the SNMP Request send by the Management Application.-->
+        <port>161</port>
+        <!--SNMP Version that the device is going to be supported(version can be 0,1,2)-->
+        <snmp-version>0</snmp-version>
+        <!--write community data of the device-->
+        <write-community>public</write-community>
+        <!--Device Model name.with this name the XMl file should be there in the config directory with all the MIB entries-->
+        <model>INTEL-COMMON</model>
+        <!--Read Community data of the device-->
+        <read-community>public</read-community>
+        <!--Interface on which IP is going to be get created. If it is linux.if it is windows give the name of the network-->
+        <intf>Local Area Connection</intf>
+        <!--Sub net mask configuration-->
+        <net-mask>255.255.255.0</net-mask>
+    </device-details>
+    <IPRange xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:type="java:com.mindtree.agentsim.parser.IPRange">
+	    <!--Name of the MIB file that device is going to be supported.this should be available in the MIBs folder-->
+	    <mib-file-name>RFC1213</mib-file-name>
+	    <!--On this port the device is going to listen for the SNMP Request send by the Management Application.-->
+	    <port>161</port>
+	    <!--SNMP Version that the device is going to be supported(version can be 0,1,2)-->
+	    <snmp-version>1</snmp-version>
+	    <!--This it the Start IPAddress of the device going to be created -->
+	    <from-iP>192.168.1.209</from-iP>
+	    <!--write community data of the device-->
+	    <write-community>public</write-community>
+	    <!--Device Model name.with this name the XMl file should be there in the config directory
+	        with all the MIB entries-->
+	    <model>GSM1213</model>
+	    <!--Read Community data of the device-->
+	    <read-community>public</read-community>
+	    <!--Interface on which IP is going to be get created. If it is linux.if it is windows give the
+	        name of the network-->
+	    <intf>Local Area Connection</intf>
+	    <!--Sub net mask configuration-->
+	    <net-mask>255.255.255.0</net-mask>
+	     <!--This it the End IPAddress of the device going to be created -->
+	    <to-iP>192.168.1.210</to-iP>
+	</IPRange>
+</array-list>
