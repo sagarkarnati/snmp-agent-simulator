@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mindtree.agentsim.parser.Device" table="devices">
+		<id name="id" column="device_id" type="java.lang.Long" unsaved-value="0">
+           <generator class="increment"/>
+        </id>
+		<property name="deviceIPAddress" column="deviceIPAddress" type="string" />
+		<property name="model" column="model" type="string" />
+		<property name="snmpVersion" column="snmpVersion" type="string" />
+		<property name="readCommunity" column="readCommunity" type="string" />
+		<property name="intf" column="intf" type="string" />
+		<property name="netMask" column="netMask" type="string" />
+		<property name="mibFileName" column="mibFileName" type="string" />
+		<bag name="mibEntries" table="mibentry" cascade="all" lazy="false">
+            <key column="device_id" />
+            <one-to-many class="com.mindtree.agentsim.mibble.MibEntry" />
+        </bag>
+	</class>
+</hibernate-mapping>
