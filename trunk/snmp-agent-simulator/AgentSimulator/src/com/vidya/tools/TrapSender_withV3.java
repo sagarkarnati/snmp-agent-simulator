@@ -28,6 +28,12 @@ import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
+/**
+ * @author Vidya Sagar
+ *
+ * Date Jan 5, 2014 12:25:00 PM
+ *
+ */
 public class TrapSender_withV3 {
 	public static final String community = "public";
 
