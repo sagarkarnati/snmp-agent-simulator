@@ -1,0 +1,1 @@
+This will simulates unlimited number of SNMP Device on a single machine.This is mainly useful for Regression Testing and development of EMS and NMS framework's and applications.
